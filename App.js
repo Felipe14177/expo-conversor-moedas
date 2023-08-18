@@ -8,6 +8,28 @@ export default function App() {
   const [moedaDestino, setMoedaDestino] = useState('USD')
   const [valorEntrada, setVAlorEntrada] = useState('33.33')
   const [resultado, setResultado] = useState('')
+
+  const handleConverter = async () => {
+  let URL = `https://economia.awesomeapi.com.br/last/${moedaOrigem}-${moedaDestino}`;
+  try {
+    let page = await fetch(URL);
+    let json = await page.json();
+    //console.log(json);
+    let indice = parseFloat(json[`${moedaOrigem}${moedaDestino}`].high)
+    //setResultado(indice)
+    setResultado((indice*valor).toFixed(2))
+  } catch (error) {
+    setResultado(`Erro: ${error.message}`)
+  }
+}
+
+  const handleLimpar = () => {
+    setResultado('');
+    setVAlorEntrada('33.33333');
+    setMoedaOrigem('BRL');
+    setMoedaDestino('USD');
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Conversor de Moedas</Text>
@@ -47,13 +69,17 @@ export default function App() {
         <Text style={styles.tbMoeda}>Valor para conversão</Text>
         <TextInput
         style={styles.input}
-        value={}
-        ></TextInput>
+        value={valorEntrada}
+        onChangeText={setVAlorEntrada}
+        keyboardType='numeric'>
+        </TextInput>
       </View>
-      <Pressable>
-        <Text style={styles.title}>
-        </Text>
+      <Pressable style={styles.button}>
+        <Text style={styles.title}>Converter</Text>
       </Pressable>
+      <View>
+        <Text>Resultado</Text>
+      </View>
       <StatusBar style="auto" />
     </View>
   );

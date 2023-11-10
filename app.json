@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-conversor-moedas",
-    "slug": "expo-conversor-moedas",
+    "name": "expo-conversor-moedas-tb",
+    "slug": "expo-conversor-moedas-tb",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
